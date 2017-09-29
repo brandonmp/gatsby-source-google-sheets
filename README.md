@@ -7,7 +7,9 @@ How to:
 
 ## Step 1: set up sheets/permissions
 
-Follow (this tutorial)[https://www.twilio.com/blog/2017/03/google-spreadsheets-and-javascriptnode-js.html], but stop just before the part that says "Read Data from a Spreadsheet with Node.js"
+Follow this tutorial: https://www.twilio.com/blog/2017/03/google-spreadsheets-and-javascriptnode-js.html
+
+...but stop just before the part that says "Read Data from a Spreadsheet with Node.js"
 
 Essentially this creates a Google Sheets API for your project, then shares whichever spreadsheet you're looking to Gatsby-fy with that endpoint. 
 
