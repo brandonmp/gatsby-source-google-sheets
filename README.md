@@ -1,7 +1,7 @@
 # gatsby-source-google-sheets
 
 ## a WIP
-I wrote this for a 1-off use case, so it's not likely to be ready for every usecase.
+I wrote this for a 1-off solution, so it's not likely to be ready for every usecase.
 
 How to:
 
