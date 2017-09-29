@@ -13,7 +13,7 @@ yarn.lock
 package-lock.json
 service-account.json
 
-/*.js
+
 !index.js
 yarn.lock
 scripts
