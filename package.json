@@ -1,19 +1,22 @@
 {
-  "name": "gatsby-plugin-google-sheets",
-  "version": "1.0.0",
-  "description": "A source plugin for Gatsby that allows reading data from Google Sheets.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "google-spreadsheet": "2.0.3"
-  },
-  "devDependencies": {
-    "flow-bin": "^0.56.0",
-    "lodash": "^4.17.4",
-    "uuid": "^3.1.0"
-  }
+    "name": "gatsby-source-google-sheets",
+    "version": "1.0.4",
+    "description": "A source plugin for Gatsby that allows reading data from Google Sheets.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Brandon Paquette <brandon@brandon.sh>",
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-source-plugin"
+    ],
+    "license": "MIT",
+    "dependencies": {
+        "flow-bin": "^0.56.0",
+        "google-spreadsheet": "2.0.3",
+        "lodash": "^4.17.4",
+        "uuid": "^3.1.0"
+    }
 }
