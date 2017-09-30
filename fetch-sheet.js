@@ -54,8 +54,8 @@ const cleanRows = rows =>
         _.mapValues(r, val => {
             if (val === '') return null;
             // sheets apparently leaves commas in some #s depending on formatting
-            if (!isNaN(val.replace(',', '')) && val !== '')
-                return Number(val.replace(',', ''));
+            if (!isNaN(val.replace(/[\W]/g, '')) && val !== '')
+                return Number(val.replace(/[\W]/g, ''));
             if (val === 'TRUE') return true;
             if (val === 'FALSE') return false;
             return val;
@@ -69,4 +69,5 @@ const fetchData = async (spreadsheetId, worksheetTitle, credentials) => {
     return cleanRows(rows);
 };
 
+ 
 module.exports = fetchData;
