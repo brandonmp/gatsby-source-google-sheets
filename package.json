@@ -8,7 +8,8 @@
         "build": "babel src --out-dir .",
         "watch": "babel -w src --out-dir .",
         "prepublish": "cross-env NODE_ENV=production npm run build",
-        "prettify": "prettier ./src/** --write"
+        "prettify": "prettier ./src/** --write",
+        "test": "jest"
     },
     "author": "Brandon Paquette <brandon@brandon.sh>",
     "keywords": ["gatsby", "gatsby-plugin", "gatsby-source-plugin"],

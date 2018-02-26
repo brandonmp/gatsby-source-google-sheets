@@ -13,13 +13,6 @@ exports.sourceNodes = async (
   let rows = await fetchSheet(spreadsheetId, worksheetTitle, credentials);
 
   rows.forEach(r => {
-    /* console.log(
-            _.mapValues(r, (val, key) => ({
-                isNull: _.isNull(val),
-                isNumber: _.isFinite(val),
-                isString: _.isString(val)
-            }))
-        ); */
     createNode(
       Object.assign(r, {
         id: uuidv5(r.id, uuidv5("gsheet", seedConstant)),
