@@ -28,33 +28,27 @@ const getRows = (worksheet, options = {}) =>
     worksheet.getRows(options, (err, rows) => {
       if (err) reject(err);
       else {
-        resolve(
-          rows.map(r =>
-            // google sheets mangles column names, so we use a dash-lowercase convention
-            // , and now we make that JS friendly w/ camelcase
-            _.mapKeys(
-              // system values we don't need
-              _.omit(r, ["_xml", "app:edited", "save", "del", "_links"]),
-              (val, key) => _.camelCase(key)
-            )
-          )
-        );
+        resolve(rows);
       }
     })
   );
 
 const cleanRows = rows =>
   rows.map(r =>
-    _.mapValues(r, val => {
-      if (val === "") return null;
-      // sheets apparently leaves commas in some #s depending on formatting
-      if (!isNaN(val.replace(/[\W]/g, "")) && val !== "") {
-        return Number(val.replace(/[\W]/g, ""));
-      }
-      if (val === "TRUE") return true;
-      if (val === "FALSE") return false;
-      return val;
-    })
+    _.chain(r)
+      .omit(["_xml", "app:edited", "save", "del", "_links"])
+      .mapKeys((v, k) => _.camelCase(k))
+      .mapValues(val => {
+        if (val === "") return null;
+        // sheets apparently leaves commas in some #s depending on formatting
+        if (val.replace(/[,\.\d]/g, "").length === 0 && val !== "") {
+          return Number(val.replace(/,/g, ""));
+        }
+        if (val === "TRUE") return true;
+        if (val === "FALSE") return false;
+        return val;
+      })
+      .value()
   );
 
 const fetchData = async (spreadsheetId, worksheetTitle, credentials) => {
@@ -64,4 +58,5 @@ const fetchData = async (spreadsheetId, worksheetTitle, credentials) => {
   return cleanRows(rows);
 };
 
-module.exports = fetchData;
+export { cleanRows };
+export default fetchData;
