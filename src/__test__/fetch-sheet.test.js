@@ -1,5 +1,4 @@
 const { cleanRows } = require("../fetch-sheet.js");
-const _ = require("lodash");
 
 describe("cleaning rows from GSheets response", () => {
   it("removes keys that don't correspond to column names", () => {
