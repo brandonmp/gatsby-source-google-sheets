@@ -8,11 +8,11 @@ exports.sourceNodes = async (
     { boundActionCreators, getNode, store, cache },
     { spreadsheetId, worksheetTitle, credentials }
 ) => {
-  const { createNode } = boundActionCreators
+    const { createNode } = boundActionCreators
 
-  let rows = await fetchSheet(spreadsheetId, worksheetTitle, credentials)
+    let rows = await fetchSheet(spreadsheetId, worksheetTitle, credentials)
 
-  rows.forEach(r => {
+    rows.forEach(r => {
         /* console.log(
             _.mapValues(r, (val, key) => ({
                 isNull: _.isNull(val),
@@ -20,19 +20,19 @@ exports.sourceNodes = async (
                 isString: _.isString(val)
             }))
         ); */
-    createNode(
+        createNode(
             Object.assign(r, {
-              id: uuidv5(r.id, uuidv5('gsheet', seedConstant)),
-              parent: '__SOURCE__',
-              children: [],
-              internal: {
-                type: _.camelCase(`googleSheet ${worksheetTitle} row`),
-                contentDigest: crypto
+                id: uuidv5(r.id, uuidv5('gsheet', seedConstant)),
+                parent: '__SOURCE__',
+                children: [],
+                internal: {
+                    type: _.camelCase(`googleSheet ${worksheetTitle} row`),
+                    contentDigest: crypto
                         .createHash('md5')
                         .update(JSON.stringify(r))
                         .digest('hex')
-              }
+                }
             })
         )
-  })
+    })
 }
