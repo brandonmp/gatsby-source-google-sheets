@@ -26,6 +26,12 @@ describe("cleaning rows from GSheets response", () => {
     expect(cleaned["falsy"]).toBe(false);
   });
 
+  it("respects emoji", () => {
+    const TEST_EMOJI_STRING = "🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑🔑";
+    const emojiRow = { emoji: TEST_EMOJI_STRING };
+    const cleaned = cleanRows([emojiRow])[0];
+    expect(cleaned.emoji).toEqual(TEST_EMOJI_STRING);
+  });
   it("returns comma-delineated number strings as numbers", () => {
     const numRow = { short: "1", long: "123,456,789", decimal: "0.5912", mixed: "123,456.789" };
     const cleaned = cleanRows([numRow])[0];
