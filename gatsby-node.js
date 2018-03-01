@@ -1,64 +1,25 @@
 "use strict";
 
-var _regenerator = require("babel-runtime/regenerator");
+const fetchSheet = require(`./fetch-sheet.js`).default;
+const uuidv5 = require("uuid/v5");
+const _ = require("lodash");
+const crypto = require("crypto");
+const seedConstant = "2972963f-2fcf-4567-9237-c09a2b436541";
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+exports.sourceNodes = async ({ boundActionCreators, getNode, store, cache }, { spreadsheetId, worksheetTitle, credentials }) => {
+  const { createNode } = boundActionCreators;
+  console.log("FETCHING SHEET", fetchSheet);
+  let rows = await fetchSheet(spreadsheetId, worksheetTitle, credentials);
 
-var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var fetchSheet = require(`./fetch-sheet.js`);
-var uuidv5 = require("uuid/v5");
-var _ = require("lodash");
-var crypto = require("crypto");
-var seedConstant = "2972963f-2fcf-4567-9237-c09a2b436541";
-
-exports.sourceNodes = function () {
-  var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(_ref, _ref2) {
-    var boundActionCreators = _ref.boundActionCreators,
-        getNode = _ref.getNode,
-        store = _ref.store,
-        cache = _ref.cache;
-    var spreadsheetId = _ref2.spreadsheetId,
-        worksheetTitle = _ref2.worksheetTitle,
-        credentials = _ref2.credentials;
-    var createNode, rows;
-    return _regenerator2.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            createNode = boundActionCreators.createNode;
-            _context.next = 3;
-            return fetchSheet(spreadsheetId, worksheetTitle, credentials);
-
-          case 3:
-            rows = _context.sent;
-
-
-            rows.forEach(function (r) {
-              createNode(Object.assign(r, {
-                id: uuidv5(r.id, uuidv5("gsheet", seedConstant)),
-                parent: "__SOURCE__",
-                children: [],
-                internal: {
-                  type: _.camelCase(`googleSheet ${worksheetTitle} row`),
-                  contentDigest: crypto.createHash("md5").update(JSON.stringify(r)).digest("hex")
-                }
-              }));
-            });
-
-          case 5:
-          case "end":
-            return _context.stop();
-        }
+  rows.forEach(r => {
+    createNode(Object.assign(r, {
+      id: uuidv5(r.id, uuidv5("gsheet", seedConstant)),
+      parent: "__SOURCE__",
+      children: [],
+      internal: {
+        type: _.camelCase(`googleSheet ${worksheetTitle} row`),
+        contentDigest: crypto.createHash("md5").update(JSON.stringify(r)).digest("hex")
       }
-    }, _callee, undefined);
-  }));
-
-  return function (_x, _x2) {
-    return _ref3.apply(this, arguments);
-  };
-}();
+    }));
+  });
+};

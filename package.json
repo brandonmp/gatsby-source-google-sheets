@@ -1,8 +1,7 @@
 {
     "name": "gatsby-source-google-sheets",
-    "version": "1.1.0",
-    "description":
-        "A source plugin for Gatsby that allows reading data from Google Sheets.",
+    "version": "1.1.1",
+    "description": "A source plugin for Gatsby that allows reading data from Google Sheets.",
     "main": "index.js",
     "scripts": {
         "build": "babel src --out-dir .",
@@ -12,7 +11,11 @@
         "test": "jest"
     },
     "author": "Brandon Paquette <brandon@brandon.sh>",
-    "keywords": ["gatsby", "gatsby-plugin", "gatsby-source-plugin"],
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-source-plugin"
+    ],
     "license": "MIT",
     "dependencies": {
         "flow-bin": "^0.56.0",

@@ -1,4 +1,4 @@
-const fetchSheet = require(`./fetch-sheet.js`);
+const fetchSheet = require(`./fetch-sheet.js`).default;
 const uuidv5 = require("uuid/v5");
 const _ = require("lodash");
 const crypto = require("crypto");
@@ -9,7 +9,7 @@ exports.sourceNodes = async (
   { spreadsheetId, worksheetTitle, credentials }
 ) => {
   const { createNode } = boundActionCreators;
-
+  console.log("FETCHING SHEET", fetchSheet);
   let rows = await fetchSheet(spreadsheetId, worksheetTitle, credentials);
 
   rows.forEach(r => {
