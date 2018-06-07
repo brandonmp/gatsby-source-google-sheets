@@ -5,6 +5,11 @@ const _ = require("lodash");
 const getSpreadsheet = (spreadsheetId, credentials) =>
   new Promise((resolve, reject) => {
     const doc = new GoogleSpreadsheet(spreadsheetId);
+
+    if (!credentials) {
+      return resolve(doc);
+    }
+    
     doc.useServiceAccountAuth(credentials, function(err) {
       if (err) reject(err);
       else resolve(doc);
