@@ -58,3 +58,7 @@ A few notes:
 
 1. Not tested with cells of data type dates.
 2. Google sheets mangles column names and converts them all to lower case. This plugin will convert them to camelcase, so the best convention here is to name your columns all lowercase with dashes. e.g. instead of "Column Name 1" or "columnName1", prefer "column-name-1"--this last one will be turned into "columnName1" in your GatsbyQL graph. 
+
+# Troubleshooting
+3. If you get the error "No key or keyFile set", make sure you are using a Service Account API key and not a simple API key.
+4. If you get the error "Cannot read property 'worksheets' of undefined", make sure you have shared your spreadsheet with your service account user.
