@@ -4,11 +4,6 @@ Why go through the hassle of setting up a complicated headless CMS when Google S
 
 This source plugin for [Gatsby JS](https://github.com/gatsbyjs/gatsby) will turn any Google Sheets worksheet into a GraphQL type for build-time consumption. 
 
-## heads-up! 
-Until [this issue in Gatsby](https://github.com/gatsbyjs/gatsby/issues/2727) is addressed, when this plugin fails, it will fail *silently*. Your build will still complete, but the data you were expecting to be available won't be there. 
-
-I'll add `retry` to this plugin eventually, but this is a limitation of Gatsby's build that likely affects all source plugins.
-
 # How to:
 
 ## Step 1: set up sheets/permissions
