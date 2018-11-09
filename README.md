@@ -13,12 +13,8 @@ I'll add `retry` to this plugin eventually, but this is a limitation of Gatsby's
 
 ## Step 1: set up sheets/permissions
 
-Follow this tutorial: https://www.twilio.com/blog/2017/03/google-spreadsheets-and-javascriptnode-js.html
-
-...but stop just before the part that says "Read Data from a Spreadsheet with Node.js"
-
-Essentially this creates a Google Sheets API for your project, then shares whichever spreadsheet you're looking to Gatsby-fy with that endpoint. 
-
+1. Create a [Google Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#creatinganaccount) and download the credentials file.
+1. Open your google sheet, click "File > Share..." and enter your service account's e-mail address (you can find it in the credentials file).
 
 
 ## Step 2: configure your gatsby project
@@ -62,3 +58,7 @@ A few notes:
 
 1. Not tested with cells of data type dates.
 2. Google sheets mangles column names and converts them all to lower case. This plugin will convert them to camelcase, so the best convention here is to name your columns all lowercase with dashes. e.g. instead of "Column Name 1" or "columnName1", prefer "column-name-1"--this last one will be turned into "columnName1" in your GatsbyQL graph. 
+
+# Troubleshooting
+3. If you get the error "No key or keyFile set", make sure you are using a Service Account API key and not a simple API key.
+4. If you get the error "Cannot read property 'worksheets' of undefined", make sure you have shared your spreadsheet with your service account user.
