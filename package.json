@@ -8,7 +8,7 @@
         "watch": "babel -w src --out-dir .",
         "prepublish": "npm run prettify && cross-env NODE_ENV=production npm run build",
         "prettify": "prettier ./src/** --write",
-        "test": "jest"
+        "test": "jest src/__test__"
     },
     "author": "Brandon Paquette <brandon@brandon.sh>",
     "keywords": [
@@ -17,6 +17,9 @@
         "gatsby-source-plugin"
     ],
     "license": "MIT",
+    "jest": {
+        "testEnvironment": "node"
+    },
     "dependencies": {
         "flow-bin": "^0.56.0",
         "google-spreadsheet": "2.0.3",
