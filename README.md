@@ -34,6 +34,38 @@ yarn add gatsby-source-google-sheets
 
 ```
 
+## Step 3: query your data
+
+Assuming that your spreadsheet has the following content.
+
+| type                             | content                                                                                                                                                                                                                                                                       |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  publication                     | Lynch, K., Schwerha, D., and Johanson, G. (2012). Development of a Weighted Heuristic for Website Evaluation for Older Adults. International Journal of Human Computer Interaction. Available online now at: http://www.tandfonline.com/doi/abs/10.1080/10447318.2012.715277. |
+| journal-article--public-or-trade | Wiker, S., Schwerha, D., Jaraiedi, M. (2009). Auditory and Visual Distractor Decrement in Older Worker Manual Assembly Task Learning: Impact of Spatial Reasoning, Field Independence and Level of Education. 4. Human Factors and Ergonomics in Manufacturing; 19: 300-317.  |
+
+where the first row is the names for the columns and they are required.
+
+The following query can then be used.
+
+```
+query PublicationsQuery {
+    allGoogleSheetPublicationsRow {
+        edges {
+            node {
+                content
+                type
+            }
+        }
+    }
+}
+```
+
+You can also access the [GraphiQL](https://www.gatsbyjs.org/docs/introducing-graphiql/) at [http://localhost:8000/___graphql](http://localhost:8000/___graphql) when Gatsby is in
+development mode (`gatsby develop`). This IDE will allow you to design and try out the query.
+
+
+# Notes
+
 The plugin makes the following conversions before feeding Gatsby nodes:
 1. Numbers are converted to numbers. Sheets formats numbers as comma-delineated strings, so to determine if something is a number, the plugin tests to see if the string (a) is non-empty and (b) is composed only of commas, decimals, and digits:
 ```
@@ -53,6 +85,11 @@ A few notes:
 
 1. Not tested with cells of data type dates.
 2. Google sheets mangles column names and converts them all to lower case. This plugin will convert them to camelcase, so the best convention here is to name your columns all lowercase with dashes. e.g. instead of "Column Name 1" or "columnName1", prefer "column-name-1"--this last one will be turned into "columnName1" in your GatsbyQL graph. 
+
+# Limitations
+
+- The first row of the sheet has to be the names of the columns.
+- There must be no empty rows in the sheet.
 
 # Troubleshooting
 3. If you get the error "No key or keyFile set", make sure you are using a Service Account API key and not a simple API key.
