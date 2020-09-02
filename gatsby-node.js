@@ -1,7 +1,7 @@
 "use strict";
 
 const fetchSheet = require(`./fetch-sheet.js`).default;
-const uuidv5 = require("uuid/v5");
+const uuidv5 = require("uuid");
 const _ = require("lodash");
 const crypto = require("crypto");
 const seedConstant = "2972963f-2fcf-4567-9237-c09a2b436541";
