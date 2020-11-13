@@ -11,7 +11,6 @@ var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var fetchSheet = require(`./fetch-sheet.js`).default;
-var uuidv5 = require("uuid/v5");
 var _ = require("lodash");
 var crypto = require("crypto");
 var seedConstant = "2972963f-2fcf-4567-9237-c09a2b436541";
@@ -25,12 +24,12 @@ exports.sourceNodes = function () {
     var spreadsheetId = _ref2.spreadsheetId,
         worksheetTitle = _ref2.worksheetTitle,
         credentials = _ref2.credentials;
-    var createNode, rows;
+    var createNode, setPluginStatus, rows;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            createNode = boundActionCreators.createNode;
+            createNode = boundActionCreators.createNode, setPluginStatus = boundActionCreators.setPluginStatus;
 
             console.log("FETCHING SHEET", fetchSheet);
             _context.next = 4;
@@ -42,7 +41,7 @@ exports.sourceNodes = function () {
 
             rows.forEach(function (r) {
               createNode(Object.assign(r, {
-                id: uuidv5(r.id, uuidv5("gsheet", seedConstant)),
+                id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
                 parent: "__SOURCE__",
                 children: [],
                 internal: {
