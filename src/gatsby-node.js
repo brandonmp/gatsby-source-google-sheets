@@ -1,3 +1,5 @@
+"use strict";
+
 const fetchSheet = require(`./fetch-sheet.js`).default;
 const uuidv5 = require("uuid/v5");
 const _ = require("lodash");
