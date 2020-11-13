@@ -43,7 +43,7 @@ const cleanRows = rows =>
       .mapValues(val => {
         if (val === "") return null;
         // sheets apparently leaves commas in some #s depending on formatting
-        if (!isNaN(val.replace(/[,]/g, "") && val !== "")) {
+        if (!isNaN(val.replace(/[,]/g, "")) && val !== "") {
           return Number(val.replace(/,/g, ""));
         }
         if (val === "TRUE") return true;
